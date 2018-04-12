@@ -1,0 +1,13 @@
+{
+    "name": "najk0/pnp-egg-dropper",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^7.1"
+    },
+    "authors": [
+        {
+            "name": "Aaron Arriero Diago",
+            "email": "aaronarriero@gmail.com"
+        }
+    ]
+}
