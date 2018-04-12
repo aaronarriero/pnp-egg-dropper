@@ -17,3 +17,8 @@ function midpoint(int $min, int $max): int
 {
     return $min + intdiv($max - $min, 2);
 }
+
+function doesEggBreak($floor, $criticalFloor)
+{
+    return $floor > $criticalFloor;
+}

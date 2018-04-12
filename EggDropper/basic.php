@@ -67,7 +67,7 @@ function exploreFloorsBinarySearch(int $minFloor, int $maxFloor, int $criticalFl
     // Determinamos desde qué piso lanzamos el huevo
     $currentFloor = midpoint($minFloor, $maxFloor);
 
-    if ($currentFloor > $criticalFloor) {
+    if (!doesEggBreak($currentFloor, $criticalFloor)) {
         // Acotamos la búsqueda descartando la mitad superior
         return exploreFloorsBinarySearch($minFloor, $currentFloor, $criticalFloor, $drops + 1);
     } else {
