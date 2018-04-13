@@ -23,8 +23,8 @@ final class IntermediateTest extends TestCase
             // Almacenamos el peor caso
             $minDrops2 = max($minDrops2, $ps->drops);
         }
-        // Resolviendo el problema en papel sabemos que el peor caso lleva 50
-        // intentos (cuando criticalFloor = 49)
-        $this->assertEquals(50, $minDrops2);
+        // Resolviendo el problema en papel sabemos que el peor caso lleva 14
+        // intentos
+        $this->assertEquals(14, $minDrops2);
     }
 }
