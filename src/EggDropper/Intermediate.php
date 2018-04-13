@@ -45,11 +45,6 @@ class Intermediate
 
     private static function solvePsBinarySearch($ps): PartialSolution
     {
-        // Ya se ha explorado todo el espacio de soluciones
-        if ($ps->minFloor === $ps->maxFloor) {
-            return $ps;
-        }
-
         // Determinamos desde qué piso lanzamos el huevo
         $currentFloor = Lib::midpoint($ps->minFloor, $ps->maxFloor);
 
