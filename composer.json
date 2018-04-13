@@ -9,5 +9,13 @@
             "name": "Aaron Arriero Diago",
             "email": "aaronarriero@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Aaron\\": "src/"
+    }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>  
-<phpunit bootstrap="bootstrap.php">  
+<phpunit bootstrap="src/bootstrap.php">  
     <testsuites>
         <testsuite name="PHPUnit EggDropper testing">
             <directory suffix=".php">./tests/</directory>
