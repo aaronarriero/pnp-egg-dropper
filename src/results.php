@@ -9,10 +9,6 @@ echo sprintf("Número mínimo de intentos en el peor de los casos, nivel básico
 echo sprintf("Número mínimo de intentos en el peor de los casos, nivel intermedio: %d\n", Intermediate::minEggDropper2());
 echo sprintf("Número mínimo de intentos en el peor de los casos, nivel difícil:\n");
 $cases = [
-    [0, 0],
-    [0, 1],
-    [1, 0],
-    [1, 1],
     [100, 100],
     [100, 2],
 ];
