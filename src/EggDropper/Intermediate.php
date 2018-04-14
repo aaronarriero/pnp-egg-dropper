@@ -16,7 +16,7 @@ class Intermediate
     public static function minEggDropper2(): int
     {
         $minDrops2 = 0;
-        for ($criticalFloor = 1; $criticalFloor <= 100; $criticalFloor++) {
+        for ($criticalFloor = 0; $criticalFloor <= 100; $criticalFloor++) {
             $ps = self::solveFor($criticalFloor);
             $minDrops2 = max($minDrops2, $ps->drops);
         }

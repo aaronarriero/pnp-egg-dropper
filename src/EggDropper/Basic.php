@@ -19,7 +19,7 @@ class Basic
     public static function minEggDropper100(): int
     {
         $minDrops100 = 0;
-        for ($criticalFloor = 1; $criticalFloor <= 100; $criticalFloor++) {
+        for ($criticalFloor = 0; $criticalFloor <= 100; $criticalFloor++) {
             $ps = self::solveFor($criticalFloor);
             $minDrops100 = max($minDrops100, $ps->drops);
         }

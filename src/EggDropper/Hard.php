@@ -13,7 +13,7 @@ class Hard
     public static function minEggDropperX($maxFloor, $eggs): int
     {
         $minDropsX = 0;
-        for ($criticalFloor = 1; $criticalFloor <= $maxFloor; $criticalFloor++) {
+        for ($criticalFloor = 0; $criticalFloor <= $maxFloor; $criticalFloor++) {
             $ps = self::solveFor($criticalFloor, $maxFloor, $eggs);
             $minDropsX = max($minDropsX, $ps->drops);
         }
