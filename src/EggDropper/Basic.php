@@ -20,41 +20,17 @@ class Basic
     {
         $minDrops100 = 0;
         for ($criticalFloor = 1; $criticalFloor <= 100; $criticalFloor++) {
-            $ps = new PartialSolution(1, 100, $criticalFloor, 0, 100);
-            while (!$ps->isSolved()) {
-                $ps = self::solvePsBinarySearch($ps);
-            }
+            $ps = self::solveFor($criticalFloor);
             $minDrops100 = max($minDrops100, $ps->drops);
         }
         return $minDrops100;
     }
 
-    /**
-     * Esta función resuelve una iteración del algoritmo de búsqueda binaria. Su
-     * funcionamiento consiste en lanzar un huevo desde la planta intermedia
-     * entre $minFloor y $maxFloor, sin embargo al no conocer criticalFloor, no
-     * podemos detener la búsqueda una vez que $currentFloor === $criticalFloor.
-     *
-     * Si el huevo se rompe exploramos pisos inferiores. No acotamos el piso
-     * superior ($currentFloor - 1) ya que de hacerlo el algoritmo nunca
-     * convergería.
-     *
-     * Si el huevo no se rompe exploramos pisos superiores. Esta vez sí es
-     * necesario acotar el piso inferior ($currentFloor + 1).
-     */
-    public static function solvePsBinarySearch(PartialSolution $ps): PartialSolution
+    public static function solveFor(int $criticalFloor): PartialSolution
     {
-        // Determinamos desde qué piso lanzamos el huevo
-        $currentFloor = Lib::midpoint($ps->minFloor, $ps->maxFloor);
-
-        $ps->drops++;
-        if (Lib::doesEggBreak($currentFloor, $ps->criticalFloor)) {
-            // Acotamos la búsqueda descartando la mitad superior
-            $ps->maxFloor = $currentFloor;
-            $ps->eggs--;
-        } else {
-            // Acotamos la búsqueda descartando la mitad inferior más una planta
-            $ps->minFloor = $currentFloor + 1;
+        $ps = new PartialSolution(1, 100, $criticalFloor, 0, 100);
+        while (!$ps->isSolved()) {
+            $ps = Lib::solvePsBinarySearch($ps);
         }
         return $ps;
     }

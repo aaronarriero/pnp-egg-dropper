@@ -8,15 +8,7 @@ class Intermediate
 
     /**
      * Determinamos el número de veces que hay que lanzar un huevo para cada
-     * criticalFloor. En este caso sólo disponemos de dos huevos, por lo que
-     * arriesgamos el primero realizando una búsqueda dando saltos desde un piso
-     * relativamente bajo, hasta que se rompa. Esta operación lleva un cierto
-     * número de intentos, y acota la búsqueda a un cierto rango de plantas que
-     * devuelve la función solvePsJumpSearch().
-     *
-     * Con el último huevo somos mucho más cuidadosos, lanzándolo desde el
-     * primer piso dentro del rango de pisos restante, subiendo las plantas de
-     * una en una hasta dar con criticalFloor.
+     * criticalFloor.
      *
      * Con esta aproximación el número de lanzamientos es mucho más consistente,
      * siendo comprendido entre 3 y 14.
@@ -33,13 +25,10 @@ class Intermediate
 
     /**
      * Encuentra el número mínimo de lanzamientos necesarios para averiguar un
-     * cierto criticalFloor. Esta vez el algoritmo empleado para el primer huevo
-     * empieza en un piso relativamente bajo y sube dando saltos hasta agotar el
-     * espacio de soluciones.
-     *
-     * Una vez roto el primer huevo el algoritmo empleado consiste en realizar
-     * un lanzamiento de forma secuencial desde la planta más baja hasta la más
-     * alta que queda por comprobar.
+     * cierto criticalFloor. Para lograrlo de la forma más eficiente empleamos
+     * el algoritmo de búsqueda por saltos con el primer huevo y el secuencial
+     * con el segundo, ya que el primer algoritmo no garantiza que el huevo no
+     * se rompa hasta agotar el espacio de soluciones.
      *
      * El piso óptimo desde el cual es necesario empezar, considerando que hay
      * 100 pisos en total, es 14. En cada iteración se sube una planta menos que
@@ -60,52 +49,21 @@ class Intermediate
      * Alternativamente puede encontrarse este número a la fuerza probando todos
      * sus valores posibles.
      */
-    public static function solveFor(int $criticalFloor): PartialSolution
+    public static function solveFor(int $criticalFloor, $startingFloor = 14): PartialSolution
     {
-        $currentFloor = 14;
-        $floorsToClimb = $currentFloor - 1;
+        $currentFloor = $startingFloor;
+        $floorsToClimb = $startingFloor - 1;
         $ps = new PartialSolution(1, 100, $criticalFloor, 0, 2);
+
         while (2 === $ps->eggs && !$ps->isSolved()) {
-            $ps = self::solvePsJumpSearch($ps, $currentFloor, $floorsToClimb);
+            $ps = Lib::solvePsJumpSearch($ps, $currentFloor, $floorsToClimb);
             $currentFloor = $currentFloor + $floorsToClimb;
             $floorsToClimb--;
         }
         while (!$ps->isSolved()) {
-            $ps = self::solvePsSequential($ps);
+            $ps = Lib::solvePsSequential($ps);
         }
-        return $ps;
-    }
 
-    /**
-     * Resuelve una iteración del algoritmo de búsqueda mediante saltos.
-     */
-    private static function solvePsJumpSearch(PartialSolution $ps, int $currentFloor, int $floorsToClimb): PartialSolution
-    {
-        $ps->drops++;
-        if (Lib::doesEggBreak($currentFloor, $ps->criticalFloor)) {
-            $ps->maxFloor = $currentFloor;
-            $ps->eggs--;
-        } else {
-            $ps->minFloor = $currentFloor + 1;
-            $ps->maxFloor = $currentFloor + $floorsToClimb;
-        }
-        return $ps;
-    }
-
-    /**
-     * Determina el número de veces que hay que lanzar un sólo huevo para averiguar
-     * $criticalFloor, de forma secuencial desde $minFloor hasta $maxFloor,
-     * pretendiendo no conocer $criticalFloor.
-     */
-    private static function solvePsSequential(PartialSolution $ps): PartialSolution
-    {
-        $ps->drops++;
-        if (Lib::doesEggBreak($ps->minFloor, $ps->criticalFloor)) {
-            $ps->eggs--;
-            $ps->maxFloor = $ps->minFloor;
-        } else {
-            $ps->minFloor++;
-        }
         return $ps;
     }
 }
