@@ -1,5 +1,6 @@
 <?php
 
+use Aaron\EggDropper\Hard;
 use Aaron\EggDropper\Lib;
 use Aaron\EggDropper\PartialSolution;
 use PHPUnit\Framework\TestCase;
@@ -81,5 +82,34 @@ final class LibTest extends TestCase
             $ps = Lib::solvePsSequential($ps);
         }
         $this->assertEquals(99, $ps->drops);
+    }
+
+    public function testSolveQuadratic(): void
+    {
+        // Planta inicial óptima para 100 plantas
+        $this->assertEquals(14, Lib::getOptimalFloor(100));
+        // Caso óptimo para 50 plantas
+        $this->assertEquals(10, Lib::getOptimalFloor(50));
+    }
+
+    public function testSolveForXY(): void
+    {
+        // Comprobamos todos los casos base. El array indica, en orden, el
+        // número de pisos, el número de huevos y los lanzamientos mínimos
+        // esperados.
+        $baseCases = [
+            [0, 0, 0],
+            [0, 1, 0],
+            [1, 0, 0],
+            [1, 1, 0],
+        ];
+        foreach ($baseCases as $case) {
+            $maxFloor = $case[0];
+            $eggs = $case[1];
+            $goalMinDrops = $case[2];
+            $minDropsX = Hard::minEggDropperX($maxFloor, $eggs);
+            $this->assertEquals($goalMinDrops, $minDropsX);
+        }
+        Hard::solveFor(50, 100, 2);
     }
 }

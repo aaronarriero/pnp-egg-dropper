@@ -93,4 +93,30 @@ class Lib
     {
         return $floor > $criticalFloor;
     }
+
+    /**
+     * Devuelve un array conteniendo las soluciones de la ecuación cuadrática
+     * dada por los términos $a, $b y $c.
+     */
+    public static function solveQuadratic(float $a, float $b, float $c): array
+    {
+        $d = $b * $b - 4 * $a * $c;
+
+        if ($d < 0) {
+            return [];
+        } else if (0 == $d) {
+            return [-$b / 2 * $a];
+        } else {
+            return [
+                (-$b + sqrt($d)) / (2 * $a),
+                (-$b - sqrt($d)) / (2 * $a),
+            ];
+        }
+    }
+
+    public static function getOptimalFloor($maxFloors): int
+    {
+        $positiveSolution = Lib::solveQuadratic(1, 1, -$maxFloors * 2)[0];
+        return round($positiveSolution);
+    }
 }
