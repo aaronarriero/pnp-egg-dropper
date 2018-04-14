@@ -32,7 +32,7 @@ class Hard
         $ps = new PartialSolution(1, $maxFloor, $criticalFloor, 0, $eggs);
 
         // Casos base en los cuales no es necesario aplicar ningún algoritmo
-        if ($eggs <= 0 || $maxFloor <= 1) {
+        if ($eggs <= 0 || $maxFloor <= 0) {
             return $ps;
         }
 
