@@ -16,7 +16,7 @@ cd pnp-egg-dropper
 composer install
 ````
 
-Para lanzar el script que muestra los resultados navegamos a la carpeta `pnp-egg-dropper/src/EggDropper` y ejecutamos el siguiente comando:
+Para lanzar el script que muestra los resultados navegamos a la carpeta `pnp-egg-dropper` y ejecutamos el siguiente comando:
 
 ````
 cd src
