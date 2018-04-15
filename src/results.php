@@ -11,6 +11,14 @@ echo sprintf("Número mínimo de intentos en el peor de los casos, nivel difíci
 $cases = [
     [100, 100],
     [100, 2],
+    [100, 1],
+    [200, 2],
+    [500, 2],
+    [1000, 2],
+    [100, 3],
+    [100, 4],
+    [100, 5],
+    [1000, 1000],
 ];
 foreach ($cases as $case) {
     $maxFloor = $case[0];
