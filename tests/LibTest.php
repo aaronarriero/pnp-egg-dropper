@@ -110,6 +110,5 @@ final class LibTest extends TestCase
             $minDropsX = Hard::minEggDropperX($maxFloor, $eggs);
             $this->assertEquals($goalMinDrops, $minDropsX);
         }
-        Hard::solveFor(50, 100, 2);
     }
 }
